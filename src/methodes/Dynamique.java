@@ -5,7 +5,7 @@ import sac.*;
 public class Dynamique {
 	private final int MULTIPLICATEUR = 10;
 
-	// que des valeurs de float
+
 	public Dynamique(SacADos sac) {
 		int[][] matrice = new int[sac.getListeObjets().length][(int) SacADos.poids_maximal * MULTIPLICATEUR + 1]; // x10
 

@@ -13,6 +13,7 @@ public class SacADos {
 	public static float  poids_maximal;
     private Objet[] listeObjets;
 
+    //CONSTRUCTEUR
     public SacADos(String chemin, float poidsMax) throws FileNotFoundException {
         SacADos.poids_maximal = poidsMax;
 
@@ -49,15 +50,18 @@ public class SacADos {
             throw new FileNotFoundException("Fichier introuvable");
         }
     }
+    
     public Objet[] getListeObjets() {
     	return this.listeObjets;
     }
     public void setListeObjets(Objet[] o) {
     	this.listeObjets=o;
     }
+    
+    
     public void resoudre(String methode) {
+    	
         switch(methode){
-
             case "gloutonne":
                 //this.gloutonne();
                 //System.out.println("Méthode gloutonne : "+this.toString());
@@ -111,12 +115,16 @@ public class SacADos {
         for(Objet o : listeObjets) {
             if(o.getEstStocke()==1) {
                 sac.append("  - ").append(o).append("\n");
-
             }
         }
         return sac.toString();
     }
-    //---------SAISIE-------
+    //---------------------SAISIE-------------------
+    /**
+     * Methode pour verifier si la valeur saisie pour le poids est un float
+     * @param s
+     * @return
+     */
     private static boolean isFloat(String s){
         try {
             Float f = Float.parseFloat(s);
@@ -148,10 +156,14 @@ public class SacADos {
             return false;
         return true;
     }
+    
+    
+    //-----------------------MAIN -----------------------------
     public static void main(String[] args) {
         Date dateDebut = new Date();
         int NB_ARG=3;
         String[] saisie;
+        
         //tant que la saisie n'est pas correcte, demander le chemin, le poids max et la methode
         do {
             System.out.println("Ecrire : chemin poids_max methode (gloutonne, dynamique ou pse)");
@@ -173,7 +185,7 @@ public class SacADos {
         //afficher la duree pour resoudre le sac
         Date dateFin = new Date();
         long duree = dateFin.getTime() - dateDebut.getTime();
-        System.out.println();
+        
         System.out.println("Durée pour résoudre le sac: " + TimeUnit.MILLISECONDS.convert(duree, TimeUnit.MILLISECONDS) + "ms");
     }
 

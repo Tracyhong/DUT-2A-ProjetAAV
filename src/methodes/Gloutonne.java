@@ -21,23 +21,26 @@ public class Gloutonne {
 
     }
     /*
-     * fonction qui prend un tableau pour effectuer un tri rapide dessus
+     * Methode recursive qui prend un tableau pour effectuer un tri rapide dessus
      * @return un tableau trié dans l'ordre decroissant
      */
     private Objet[] triRapideRec(Objet[] listeObjets, int premier, int dernier) {
         if (premier < dernier) {
             TabEtNewPivot tabEtNewPivot = new TabEtNewPivot();
             int p = choixPivot(listeObjets, premier, dernier);
-
+            //repartir toutes les petites valeurs à gauche et les grandes à droite par rapport au pivot
             tabEtNewPivot = repartition(listeObjets, premier, dernier, p);
+            //REFAIRE
+            //gauche
             triRapideRec(tabEtNewPivot.getTabObjets(), premier, tabEtNewPivot.getNewPivot() - 1);
+            //droite
             triRapideRec(tabEtNewPivot.getTabObjets(), tabEtNewPivot.getNewPivot() + 1, dernier);
         }
         return listeObjets;
     }
 
     /*
-     * choix du pivot
+     * choix du pivot : l'objet au milieu
      * @return indice du pivot
      */
     private int choixPivot(Objet[] listeObjets, int premier, int dernier) {
@@ -45,7 +48,7 @@ public class Gloutonne {
     }
 
     /*
-     * fonction de répartition (met les éléments < pivot a gauchet et > pivot à droite
+     * Méthode de répartition (met les éléments < pivot à gauche et > pivot à droite)
      * @return un struct (tableau + pivot)
      */
     private TabEtNewPivot repartition(Objet[] listeObjets, int premier, int dernier, int pivot) {

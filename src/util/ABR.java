@@ -14,7 +14,11 @@ public class ABR {
 
     private int profondeur;
 
+    //la meilleur valeur des objets a mettre dans le sac 
     private static float borneInf=0;
+    
+    //depend de chaque noeud 
+    //valeur totale des objets dans le noeud + les objets suivant a mettre
     private float borneSup;
 
     private static Objet[] listeObjetFin;
@@ -24,9 +28,7 @@ public class ABR {
         if (profondeur <= objets.length) {
 
             // copie du tabObj dans this.objets
-
             this.objetsNoeud = new Objet[tabObj.length];
-
             for (int i=0; i<objets.length; ++i){
                 if (tabObj[i] != null){
                     this.objetsNoeud[i] = tabObj[i];
@@ -38,7 +40,9 @@ public class ABR {
             this.setBorneInf();
 
             if (profondeur != objets.length) {
-
+            	//commencer a creer l'abre par la droite pour optimiser la construction 
+            	//on va atteindre une borne inferieur deja optimale rapidement.
+            	
                 //copie + ajout de l'objet suivant
                 //ajout de l'objet suivant dans tabObj
                 tabObj[profondeur] = objets[profondeur];
@@ -77,7 +81,7 @@ public class ABR {
         //verifier si on a trouvé le meilleur noeud par rapport à la borne inferieure
         //puis stocker les objets dans un tableau static et quitter
         if(this.valeurObjetsNoeud()==ABR.borneInf) {
-            this.listeObjetFin=this.objetsNoeud;
+            ABR.listeObjetFin=this.objetsNoeud;
             return;
         }
         if(this.sousAbrGauche!=null) {
@@ -85,7 +89,7 @@ public class ABR {
         }
     }
     public Objet[] getListeObjetFin(){
-        return this.listeObjetFin;
+        return ABR.listeObjetFin;
     }
     /*
      * mis à jour de l'attribut statique borneInferieure lorsqu'une meilleure valeur (correspondant à une combinaison) est trouvée
